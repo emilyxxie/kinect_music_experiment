@@ -63,8 +63,8 @@ class Particle2 {
     location = new PVector(x, y, z);
     velocity = new PVector(0, 0, 0);
     
-    lifeSpan = random(3, 8);
-    speed    = random(2, 60);
+    lifeSpan = random(3, 16);
+    speed    = random(2, 10);
     
     history = new ArrayList<PVector>();
   }
