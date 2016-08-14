@@ -30,8 +30,8 @@ void flowField2() {
       }
 
       Particle2 particle = new Particle2(
-        x * particleSpacing + random(-10, 10), 
-        y * particleSpacing + random(-10, 10),
+        x * particleSpacing + random(-8, 8), 
+        y * particleSpacing + random(-8, 8),
         subtractZ - z
       );
       particles2.add(particle);
@@ -84,11 +84,13 @@ class Particle2 {
   
   void render() {
     strokeWeight(2);
-    stroke(r, g, b, 100);
+    stroke(r, g, b, 50);
     strokeWeight(2); 
-    beginShape(LINES);
+    noFill();
+    beginShape();
       vertex(location.x, location.y, location.z);    
       for (int i = 0; i < history.size(); i++) {
+       
          vertex(
            history.get(i).x, 
            history.get(i).y, 
@@ -123,13 +125,13 @@ class FlowField2 {
              xNoise, 
              yNoise, 
              zNoise)
-            ) * 700);
+            ) * 200);
          grid[i][j] = PVector.fromAngle(angle);
          yNoise += 0.1;
        }
        xNoise += 0.1;
      }
-     zNoise += 0.03;
+     zNoise += 0.05;
    
    }
   
@@ -151,6 +153,6 @@ class FlowField2 {
 }
 
 void initFlowField2() {
-  flowField2 = new FlowField(20);
+  flowField2 = new FlowField(5);
   particles2 = new ArrayList<Particle2>();
 }
