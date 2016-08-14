@@ -2,7 +2,7 @@ FlowField           flowField2;
 ArrayList<Particle2> particles2; 
 boolean initializedFlowField2 = false;
 
-int particlesIncrementFF2 = 5;
+int particlesIncrementFF2 = 10;
 
 void flowField2() {  
   
@@ -21,8 +21,8 @@ void flowField2() {
   
   flowField2.updateField();
   
-  for (int x = 0; x < kinect2.depthWidth; x += particlesIncrementFF) {
-    for (int y = 0; y < kinect2.depthHeight; y += particlesIncrementFF) {
+  for (int x = 0; x < kinect2.depthWidth; x += particlesIncrementFF2) {
+    for (int y = 0; y < kinect2.depthHeight; y += particlesIncrementFF2) {
       int offset = x + y * kinect2.depthWidth;
       int z = depth[offset];
       if (z > maxDepth || z == 0) {
@@ -30,8 +30,8 @@ void flowField2() {
       }
 
       Particle2 particle = new Particle2(
-        x * particleSpacing, 
-        y * particleSpacing,
+        x * particleSpacing + random(-10, 10), 
+        y * particleSpacing + random(-10, 10),
         subtractZ - z
       );
       particles2.add(particle);
@@ -57,13 +57,16 @@ class Particle2 {
   float lifeSpan;
   float age;
   
+  ArrayList<PVector> history;
   
   Particle2 (float x, float y, float z) {
     location = new PVector(x, y, z);
     velocity = new PVector(0, 0, 0);
     
-    lifeSpan = random(3, 15);
-    speed    = random(2, 10);
+    lifeSpan = random(3, 8);
+    speed    = random(2, 60);
+    
+    history = new ArrayList<PVector>();
   }
   
   void update() {
@@ -71,9 +74,11 @@ class Particle2 {
     if (!onBeat) {
       velocity = flowField2.lookupVelocity(location);
       velocity.mult(speed);
+      history.add(location.copy());
       location.add(velocity);
       age++;
     }
+
     
   }
   
@@ -81,7 +86,17 @@ class Particle2 {
     strokeWeight(2);
     stroke(r, g, b, 100);
     strokeWeight(2); 
-    point(location.x, location.y, location.z);
+    beginShape(LINES);
+      vertex(location.x, location.y, location.z);    
+      for (int i = 0; i < history.size(); i++) {
+         vertex(
+           history.get(i).x, 
+           history.get(i).y, 
+           history.get(i).z
+         );
+      }
+    
+    endShape();
   }
 }
 
