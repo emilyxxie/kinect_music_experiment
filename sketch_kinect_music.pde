@@ -75,12 +75,16 @@ void draw() {
   
   depth = kinect2.getRawDepth();
 
-  if (cycle <= 100) {
+  if (cycle <= 800) {
     replication();
-  } else if (cycle <= 200) {
+  } else if (cycle <= 1600) {
     flowField();
-  } else if (cycle <= 300) {
+  } else if (cycle <= 2400) {
     flowField2();
+  }
+  
+  if (cycle >= 300) {
+    cycle = 0;
   }
    //flowField2(); // yes
   // duplicate(); // yes
