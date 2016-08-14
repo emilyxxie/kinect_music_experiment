@@ -75,23 +75,20 @@ void draw() {
   
   depth = kinect2.getRawDepth();
 
-  if (cycle <= 800) {
+  if (cycle <= 2000) {
     replication();
-  } else if (cycle <= 1600) {
+  } else if (cycle <= 4000) {
     flowField();
-  } else if (cycle <= 2400) {
+  } else if (cycle <= 6000) {
     flowField2();
   }
   
-  if (cycle >= 300) {
+  if (cycle >= 6000) {
+    // reset all variables
+    totalReplicates = 0;
+    totalBeats = 0;
     cycle = 0;
   }
-   //flowField2(); // yes
-  // duplicate(); // yes
-   //pointCloud(); 
-   //flashyLines();
-  //replication();
-   //flowField(); // yes
 
   popMatrix();
   textSize(17);
