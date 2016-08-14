@@ -1,5 +1,5 @@
-float yRotateIncrement = 0.002;
-float yRotate = 0;
+//float yRotateIncrement = 0.002;
+//float yRotate = 0;
 boolean moveBackward = true;
 
 void pointCloud() {

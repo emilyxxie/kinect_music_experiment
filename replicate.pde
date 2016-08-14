@@ -1,19 +1,15 @@
 int totalReplicates = 1;
 int totalBeats = 1;
-int beatsToReplication = 30;
+int beatsToReplication = 40;
 float zRotate = 0;
 int framesToRotation = 100;
 int framesSinceReplication = 0;
-//int move = false;
+boolean moveBackwardR = false;
 
-//float yRotateIncrement = 0.002;
-//float yRotate = 0;
+float yRotateIncrement = 0.0004;
+float yRotate = 0;
 
-void replication() {
-  
-  // make additional duplicates based on beat
-  // so, every 20 beats
-  
+void replication() {  
   if (onBeat) {
     if (zTranslate == 1700) {
       zTranslate = 1750;
@@ -35,26 +31,22 @@ void replication() {
     0, 
     zTranslate
   );
-  
-  //if (totalReplicates == 3) {
-  //  framesSinceReplication++;
-  //}
-  
-  //if (framesSinceReplication >= framesToRotation) {
-  //  if (moveBackward) {
-  //    yRotate += yRotateIncrement;
-  //  } else {
-  //    yRotate -= yRotateIncrement;
-  //  }
+    if (moveBackwardR) {
+      yRotate += yRotateIncrement;
+    } else {
+      yRotate -= yRotateIncrement;
+    }
     
-  //  if (yRotate >= 0.700) {
-  //    moveBackward = false;
-  //  } 
+    if (yRotate >= 0.06) {
+      moveBackwardR = false;
+    } 
     
-  //  if (yRotate <= -0.4) {
-  //    moveBackward = true;
-  //  }
-  //}
+    if (yRotate <= -0.06) {
+      moveBackwardR = true;
+    }
+  
+  rotateX(yRotate);
+  rotateZ(yRotate);
   
   background(0);
 

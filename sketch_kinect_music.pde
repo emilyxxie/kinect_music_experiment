@@ -12,6 +12,8 @@ Minim                  minim;
 ddf.minim.analysis.FFT fft;
 BeatDetect             beat;
 
+float cycle = 0;
+
 float particlesIncrement = 2;
 //float particleSpacing = 1.5;
 float yPadding;
@@ -41,7 +43,7 @@ float b;
 
 void setup() {
   fullScreen(P3D, 2);
-  xPadding = 0;
+  xPadding = width / 5;
   
   kinect2 = new Kinect2(this);
   kinect2.initDepth();
@@ -73,14 +75,22 @@ void draw() {
   
   depth = kinect2.getRawDepth();
 
-   //ghost();
-   flowField2();
-  // duplicate();
-  // pointCloud();
+  if (cycle <= 100) {
+    replication();
+  } else if (cycle <= 200) {
+    flowField();
+  } else if (cycle <= 300) {
+    flowField2();
+  }
+   //flowField2(); // yes
+  // duplicate(); // yes
+   //pointCloud(); 
    //flashyLines();
   //replication();
+   //flowField(); // yes
 
   popMatrix();
   textSize(17);
   text("@emilyxxie", width - 100, height - 10);
+  cycle++;
 }
