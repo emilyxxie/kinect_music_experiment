@@ -1,6 +1,6 @@
 int totalReplicates = 1;
 int totalBeats = 1;
-int beatsToReplication = 10;
+int beatsToReplication = 30;
 float zRotate = 0;
 int framesToRotation = 100;
 int framesSinceReplication = 0;
@@ -90,9 +90,9 @@ void replication() {
           }
         } else {
           vertex(
-            x * particleSpacing + (i * 200) + sin(frameCount), 
-            y * particleSpacing + (i * 10) + sin(frameCount), 
-            subtractZ - z + (i  * 250) + sin(frameCount)
+            x * particleSpacing + (i * frameCount % width - 100) + sin(frameCount), 
+            y * particleSpacing + (i * frameCount % 40) + sin(frameCount), 
+            subtractZ - z + (i  * frameCount % 500) + sin(frameCount)
           );
         }
       }

@@ -13,7 +13,7 @@ ddf.minim.analysis.FFT fft;
 BeatDetect             beat;
 
 float particlesIncrement = 2;
-float particleSpacing = 1.5;
+//float particleSpacing = 1.5;
 float yPadding;
 float xPadding;
 float randomIncrement = 10;
@@ -21,7 +21,11 @@ float randomIncrement = 10;
 // z axis related stuff
 float zTranslate = 1700;
 float subtractZ = 0;
-float maxDepth = 2600;
+//float maxDepth = 2600;
+
+// home params
+float maxDepth = 2100;
+float particleSpacing = 1.8;
 
 int[] depth;
 
@@ -33,8 +37,10 @@ float r;
 float g;
 float b;
 
+
+
 void setup() {
-  fullScreen(P3D);
+  fullScreen(P3D, 2);
   xPadding = 0;
   
   kinect2 = new Kinect2(this);
@@ -67,11 +73,12 @@ void draw() {
   
   depth = kinect2.getRawDepth();
 
-  // ghost();
+   //ghost();
+   flowField2();
   // duplicate();
   // pointCloud();
-  // flashyLines();
-  replication();
+   //flashyLines();
+  //replication();
 
   popMatrix();
   textSize(17);
